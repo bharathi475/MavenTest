@@ -10,6 +10,11 @@ import com.proj.qa.pages.HomePage;
 import com.proj.qa.pages.LoginPage;
 import com.proj.qa.util.TestUtil;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Step;
+
 public class LoginPageTest extends TestBase {
 	LoginPage loginPage;
 	HomePage homePage;
@@ -24,12 +29,18 @@ public class LoginPageTest extends TestBase {
 		loginPage = new LoginPage();
 	}
 	
+	@Step("TC_LP_001")
+	@Description("Verify Login Page Title")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(priority=1)
 	public void loginPageTitleTest() {
 		String title = loginPage.validateLoginPageTitle();
 		Assert.assertEquals(title, TestUtil.loginPageTitle);
 	}
 	
+	@Step("TC_LP_002")
+	@Description("Verify Login Functionality")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(priority=2)
 	public void loginFunctionalityTest() {
 		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));

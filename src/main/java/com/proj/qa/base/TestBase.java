@@ -4,9 +4,8 @@ import java.io.FileInputStream;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import com.proj.qa.util.TestUtil;
@@ -31,7 +30,6 @@ public class TestBase {
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static void initialization() {
 		String browserName = prop.getProperty("browser");
 		
@@ -47,11 +45,8 @@ public class TestBase {
 		
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
-		driver.manage().timeouts().pageLoadTimeout(TestUtil.pageLoadTime, TimeUnit.SECONDS);
-		driver.manage().timeouts().implicitlyWait(TestUtil.implicitTime, TimeUnit.SECONDS);
-//		//Alternative:
-//		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(TestUtil.pageLoadTime));
-//		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TestUtil.implicitTime));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(TestUtil.pageLoadTime));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TestUtil.implicitTime));
 		driver.get(prop.getProperty("url"));
 	}
 
